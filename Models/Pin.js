@@ -8,15 +8,11 @@ const PinSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
-  title: {
-    type: String,
-    required: true
-  },
   image: {
     type: String,
     required: true
   },
-  imageURL: {
+  sourceURL: {
     type: String,
     required: true
   },
@@ -26,6 +22,10 @@ const PinSchema = new Schema({
       user: {
         type: Schema.Types.ObjectId,
         ref: "users"
+      },
+      board: {
+        type: Schema.Types.ObjectId,
+        ref: "boards"
       }
     }
   ],

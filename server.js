@@ -4,11 +4,10 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 
 //Connects routes
-/*
-const user = require("./routes/api/users");
+const users = require("./routes/api/users");
 const boards = require("./routes/api/boards");
 const pins = require("./routes/api/pins");
-*/
+
 const app = express();
 
 //Body Parser middleware
@@ -31,11 +30,10 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Sets up api routes
-/* Uncomment after routes are set up
-app.use("api/users", users);
-app.use("api/boards", profile);
-app.use("/api/posts", posts);
-*/
+app.use("/api/users", users);
+app.use("/api/boards", boards);
+app.use("/api/pins", pins);
+
 app.get("/", (req, res) => res.json("Hello World"));
 
 const port = process.env.PORT || 5000;

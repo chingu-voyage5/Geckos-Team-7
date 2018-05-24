@@ -6,10 +6,6 @@ const BoardSchema = new Schema({
     type: String,
     required: true
   },
-  url: {
-    type: String,
-    required: true
-  },
   description: {
     type: String
   },
@@ -21,7 +17,11 @@ const BoardSchema = new Schema({
         ref: "pin"
       }
     }
-  ]
+  ],
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 module.exports = Board = mongoose.model("board", BoardSchema);
