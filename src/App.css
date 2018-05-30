@@ -1,0 +1,27 @@
+
+#app {
+  display:grid;
+  grid-template-areas:"header"
+                      "body";
+  grid-template-columns:1fr;
+  grid-template-rows: "150px 1fr";
+}
+
+#header {
+  border:1px solid black;
+  display:grid;
+  grid-area:"header";
+  grid-template-areas: "logo search-bar home profile notifications more";
+  grid-template-columns: 80px 1fr 80px 80px 80px 80px;
+  grid-template-rows:1fr;
+}
+
+#header > #search-bar {
+  background:gray;
+}
+
+#body {
+  display:flex;
+  justify-content:center;
+  grid-area:"body";
+}
