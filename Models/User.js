@@ -28,6 +28,14 @@ const UserSchema = new Schema({
       }
     }
   ],
+  pins: [
+    {
+      pins: {
+        type: Schema.Types.ObjectId,
+        ref: "pin"
+      }
+    }
+  ],
   // Records date of user creation
   date: {
     type: Date,

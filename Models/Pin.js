@@ -12,20 +12,25 @@ const PinSchema = new Schema({
     type: String,
     required: true
   },
-  sourceURL: {
+  sourceUrl: {
     type: String,
     required: true
   },
   //Associates a pin with a user
   saves: [
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "users"
-      },
       board: {
         type: Schema.Types.ObjectId,
         ref: "boards"
+      }
+    }
+  ],
+
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
       }
     }
   ],
