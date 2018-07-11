@@ -36,6 +36,20 @@ module.exports = {
         include: helpers.root('client'),
         loader: 'babel-loader'
       },
+      /*Start css loader here*/
+      {
+        
+          test: /\.css$/,
+          loader: 'style-loader'
+        }, {
+          test: /\.css$/,
+          loader: 'css-loader',
+          query: {
+            modules: true,
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+          }
+        
+      },
 
       // SCSS files
       {
@@ -89,3 +103,5 @@ module.exports = {
     }])
   ]
 };
+
+

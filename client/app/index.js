@@ -1,30 +1,27 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
+//import 'semantic-ui-css/semantic.min.css';
+import { AppContainer } from 'react-hot-loader';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from './components/App';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
+const root = document.getElementById('app');
 
-import App from './components/App/App';
-import NotFound from './components/App/NotFound';
+const renderApp = () => {
+  ReactDOM.render(
+    <AppContainer>
+      <Router>
+      <App />
+      </Router>
+    </AppContainer>
+    , root,
+  );
+};
 
-import Home from './components/Home/Home';
+renderApp();
 
-import HelloWorld from './components/HelloWorld/HelloWorld';
+// Hot module reloading
+if (module.hot) {
+  module.hot.accept('./components/App', renderApp);
+}
 
-import './styles/styles.scss';
-
-render((
-  <Router>
-    <App>
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route path="/helloworld" component={HelloWorld}/>
-        <Route component={NotFound}/>
-      </Switch>
-    </App>
-  </Router>
-), document.getElementById('app'));
