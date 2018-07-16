@@ -28,15 +28,16 @@ class SignUp extends React.Component{
         const { error } = this.state;
     
         return (
-          <Grid>
-            <Header>
-              <title>Sign Up Here!</title>
-            </Header>
-    
+          <div className="container">
+          <Grid >
+            
             <Grid.Column width={6} />
-            <Grid.Column width={6}>
+            <Grid.Column width={4}>
               <Form  error={error} onSubmit={this.onSubmit}>
-                <Header as="h1">Sign Up</Header>
+              <Header as="h1">
+                Sign Up Here!
+              </Header>
+    
                 <Form.Input
                   inline
                   label="FullName"
@@ -70,7 +71,8 @@ class SignUp extends React.Component{
               <div>Have an account already?</div>
                 <Link to="/login">Log in here!</Link>
             </Grid.Column>
-          </Grid>)
+          </Grid>
+          </div>)
 }
 }
 

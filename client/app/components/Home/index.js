@@ -1,6 +1,5 @@
 import React from 'react';
 import { Sidebar, Menu, Icon } from 'semantic-ui-react';
-
 import store from 'store';
 import { Route, Link, Switch, Redirect} from 'react-router-dom';
 import Gallery from '../HomePage';
@@ -12,6 +11,7 @@ const handleLogout = history => () => {
   store.remove('loggedIn');
   history.push('/login');
 };
+
 
 
 const Home = ({history}) => {

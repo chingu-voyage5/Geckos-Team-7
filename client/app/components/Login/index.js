@@ -3,6 +3,7 @@ import { Grid, Form, Header, Message } from 'semantic-ui-react';
 //import { Helmet } from 'react-helmet';
 import store from 'store';
 import {Link } from 'react-router-dom';
+import './style.css';
 
 class Login extends React.Component{
     constructor(props){
@@ -24,20 +25,20 @@ class Login extends React.Component{
         if (!(username === 'chau' && password === 'tran')) {
             return this.setState({ error: true });}
             store.set('loggedIn', true);
-            history.push('/home');
+            history.push('/homepage');
     }
 
     render() {
         const { error } = this.state;
     
         return (
-          <Grid>
+          <div className="container">
+          <Grid  >
     
             <Grid.Column width={6} />
             <Grid.Column width={4}>
               <Form  error={error} onSubmit={this.onSubmit}>
-                <Header as="h1">Welcome to Pinterest</Header>
-                <h2>Log In Now</h2>
+                <Header as="h1">Welcome to Pinterest Login</Header>
                 {error && <Message
                   error={error}
                   content="That username/password is incorrect. Try again!"
@@ -62,6 +63,7 @@ class Login extends React.Component{
                 <Link to="/signup">Sign Up</Link>
             </Grid.Column>
           </Grid>
+          </div>
         );
       }
 }
