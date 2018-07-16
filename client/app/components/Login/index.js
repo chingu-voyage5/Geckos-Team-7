@@ -38,7 +38,7 @@ class Login extends React.Component{
             <Grid.Column width={6} />
             <Grid.Column width={4}>
               <Form  error={error} onSubmit={this.onSubmit}>
-                <Header as="h1">Welcome to Pinterest Login</Header>
+                <Header as="h1">Welcome to Pinterest Clone Login</Header>
                 {error && <Message
                   error={error}
                   content="That username/password is incorrect. Try again!"
