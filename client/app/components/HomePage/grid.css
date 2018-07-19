@@ -1,31 +1,25 @@
-/* ---- grid ---- */
+* { box-sizing: border-box; }
+html { overflow-y: scroll; }
 .grid {
-    max-width: 100%;
-    padding: 5px;    
-    margin: 5px
+    background: palevioletred;
+    border: 1px solid blueviolet;
 }
-
-/* ---- grid-item ---- */
-.grid-sizer{
-    width: 33.333%;
-   
+.grid:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+.grid-sizer, .grid-item {
+    width: 33.333%; 
 }
-.grid-item {
-    width: 33%;
-    height: 20%;
+.grid-item { 
     float: left;
+    border: 1px sold red;
 }
-
 .grid-item img {
     display: block;
-    width: 100%;
-  }
-
-#gridMasonry {
-    height: 600px;
-    width: 700px;
+    max-width: 100%;
 }
-
 
   
   
