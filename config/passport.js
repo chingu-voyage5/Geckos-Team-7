@@ -8,10 +8,16 @@ const keys = require("../config/keys");
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secretOrKey;
+console.log("what us optsjwtFromRequest()", opts.jwtFromRequest);
 
 module.exports = passport => {
+  console.log("passport should be used");
   passport.use(
-    new JwtStrategy(opts, (jwt_payload, done) => {
+    new JwtStrategy({
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey   : keys.secretOrKey
+    }, function (jwt_payload, done) {
+      console.log("jwt_payload", jwt_payload);
       User.findById(jwt_payload.id)
         .then(user => {
           if (user) {

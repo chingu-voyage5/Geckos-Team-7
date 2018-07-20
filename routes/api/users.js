@@ -40,6 +40,7 @@ router.get("/", (req, res) => {
 // @desc Get users
 // @access Public
 router.post("/register", (req, res) => {
+  console.log("req.body is", req.body);
   const { errors, isValid } = validateRegisterInput(req.body);
   User.findOne({ email: req.body.email }).then(user => {
     if (!isValid) {
@@ -57,6 +58,7 @@ router.post("/register", (req, res) => {
 
       // I like my passwords like I like my fries salted
       // But seriously this code block encrypts the users password
+
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
@@ -69,6 +71,7 @@ router.post("/register", (req, res) => {
       });
     }
   });
+
 });
 
 // @route POST api/users/login
@@ -104,11 +107,10 @@ router.post("/login", (req, res) => {
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 3600 }, //One hour
           (err, token) => {
             res.json({
               success: true,
-              token: "Bearer " + token
+              token: token
             });
           }
         );

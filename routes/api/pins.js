@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const protected = express.Router();//will make this a protected route
 const bcrypt = require("bcryptjs");
 const keys = require("../../config/keys");
 const jwt = require("jsonwebtoken");
@@ -14,7 +15,7 @@ const User = require("../../models/User");
 //Validation
 const validateNewPin = require("../../validation/pins");
 
-// @route GET api/users/test
+// @route GET api/pins/test
 // @desc Test users route
 // @access Public
 router.get("/test", (req, res) => res.json({ msg: "Pins Works" }));
@@ -26,6 +27,7 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("req and res jwt passport auth", req, res);
     const { errors, isValid } = validateNewPin(req.body);
 
     //Check Validation
@@ -80,7 +82,9 @@ router.get(
         res.status(200).json(pins);
       })
       .catch(err => res.status(404).json(err));
+
   })
+
 );
 
 // @route POST api/pins/like/:id
@@ -163,4 +167,23 @@ router.delete(
   }
 );
 
-module.exports = router;
+//Following is for testing authentication
+// @route GET api/pins/secret
+protected.get("/secret", function(req, res) {
+  console.log("Access with token only");
+  res.json("You cannot see this without token");
+})
+protected.get("/secretDebug", function(req, res, next){
+    console.log(req.get('Authorization'));
+    console.log(req);
+    next();
+  }, function(req, res){
+    res.json("debugging");
+});
+
+
+//module.exports = router;
+module.exports = {
+  protected: protected,
+  router: router
+};

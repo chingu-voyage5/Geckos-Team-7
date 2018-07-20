@@ -6,6 +6,7 @@ module.exports = function validateNewPin(data) {
 
   data.sourceUrl = !isEmpty(data.sourceUrl) ? data.sourceUrl : "";
   data.image = !isEmpty(data.image) ? data.image : "";
+  console.log("url and image name", data.sourceUrl, data.image);
 
   if (!isEmpty(data.sourceUrl)) {
     if (!Validator.isURL(data.sourceUrl)) {
@@ -13,10 +14,10 @@ module.exports = function validateNewPin(data) {
     }
   }
 
-  if (!isEmpty(data.image)) {
-    if (!Validator.isURL(data.image)) {
-      errors.sourceUrl = "Please enter a valid URL for your image";
-    }
+  if (isEmpty(data.image)) {
+    //if (!Validator.isURL(data.image)) {
+      errors.sourcImg = "Please enter a name your image";
+    //}
   }
 
   return {

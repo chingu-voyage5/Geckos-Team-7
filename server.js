@@ -32,7 +32,12 @@ require("./config/passport")(passport);
 // Sets up api routes
 app.use("/api/users", users);
 app.use("/api/boards", boards);
-app.use("/api/pins", pins);
+app.use("/api/pins", pins.router);
+//for protected pins:
+app.use("/api/pins", passport.authenticate("jwt", { session: false }), pins.protected);
+//app.use("/api/pins", pins.protected);
+///making some change
+//app.use("/api/pins/secret", passport.authenticate("jwt", { session: false }), pins);
 
 app.get("/", (req, res) => res.json("Hello World"));
 
