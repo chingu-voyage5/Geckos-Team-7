@@ -1,12 +1,13 @@
 import React from 'react';
 import { Grid, Form, Header, Message } from 'semantic-ui-react';
 import store from 'store';
+import {axios} from 'axios';
 import {Link } from 'react-router-dom';
 
 class SignUp extends React.Component{
     constructor(props){
         super(props);
-        this.state ={fullname:'',username:'',email:'',password:'',error:false}
+        this.state ={username:'',email:'',password:'',error:false}
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
@@ -20,8 +21,10 @@ class SignUp extends React.Component{
         //pull history from props
         const { history } = this.props;
         this.setState({ error: false });
-        console.log("You have signed up")
-        console.log(this.state);
+        axios.post('/api/users/register', { name, email, password })
+        .then((result) => {
+          this.props.history.push("/login")
+        });
     }
 
     render() {
@@ -38,12 +41,7 @@ class SignUp extends React.Component{
                 Sign Up Here!
               </Header>
     
-                <Form.Input
-                  inline
-                  label="FullName"
-                  name="fullname"
-                  onChange={this.handleChange} required
-                />
+                
                 <Form.Input
                   inline
                   label="UserName"

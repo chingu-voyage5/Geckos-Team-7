@@ -72,31 +72,23 @@
 
 import React from 'react';
 import Masonry from 'masonry-layout';
-
-import projects from './links.json';
+import axios from 'axios';
 import './grid.css';
+import {AddImg} from '/AddImg';
 
 class Gallery extends React.Component {
     constructor(props) {
         super(props);
-        //this.state = {items: []}
+        this.state = {items:[]};
+        this.createGrid = this.createGrid.bind(this);
+        this.onAddNewPic = this.onAddNewPic.bind(this);
     }
     componentDidMount() {
-        //this.setState({items:projects});
-        //this.createGrid();
-        /*
-        var elem = document.querySelector('.grid');
-        var msnry = new Masonry( elem, {
-            // options
-            itemSelector: '.grid-item',
-            columnWidth: '.grid-sizer',
-            percentPosition: true
-        });
-        setTimeout(function() {
-            console.log("Masonry layout", msnry);
-            msnry.layout();
-        },5000)
-        */
+        //fetch data from route api/pins to display all images on homepage
+        axios.get('/api/pins').then(({ data: items }) => {
+            this.setState({items});
+          });
+
        var elem = document.querySelector('.grid');
         
         var msnry = new Masonry( elem, {
@@ -124,20 +116,38 @@ class Gallery extends React.Component {
     //This would not work great if there were a lot of images
     }
     createGrid() {
-        console.log(Masonry);
-        console.log(projects);
-        let items = projects.map((ele,i)=> {
+        let images = this.state.items.map((ele,i)=> {
             return (<div className="grid-item" key={i}>
-            <img src={ele.img} alt="image"/>
+            <img src={ele.sourceUrl} alt={ele.image}/>
+            <figcaption>{ele.image}</figcaption>
             </div>);
         })
-        console.log("items is", items);
+       
         
-        
-        
-        return items;
+         return images;
 
     }
+
+    onAddNewPic(e){
+        const { history } = this.props;
+     
+      e.preventDefault();
+      // get our form data out of state
+      const {items } = this.state;
+       
+      axios.post('/api/pins', { image, sourceUrl })
+        .then((result) => {
+          //access the results here....
+          //add pinned img to homepage and my wall
+          this.setState({items: items.push(result)})
+
+         // console.log(result);
+        });
+        history.push('/homepage');//redirect to homepage
+        
+    }
+
+
     render() {
         
         return (

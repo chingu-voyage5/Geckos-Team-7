@@ -1,14 +1,13 @@
 import React , {Component} from 'react';
 import { Grid, Form, Header, Message } from 'semantic-ui-react';
 
-import {axios, post} from 'axios';
 
 class AddImg extends Component{
     constructor(props){
         super(props);
-        this.state ={title:'',url:''}
+        
         this.handleChange = this.handleChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        
 
     }
 
@@ -17,32 +16,17 @@ class AddImg extends Component{
         // super easy to update the state
         this.setState({ [name]: value });
     }
-    onSubmit(e){
-        const { history } = this.props;
-     
-      e.preventDefault();
-      // get our form data out of state
-      const {title, url } = this.state;
-       //post the form obj to the api backend and render the img on homepage and mywall
-      // axios.post('/api/addnewimg', { title, url })
-      //   .then((result) => {
-      //     //access the results here....
-      //     console.log(result);
-      //   });
-        history.push('/homepage');//redirect to homepage
-        
-    }
-
+    
     render() {
         return (
           <Grid>
             <Header>
-              <title>Add an image</title>
+              <title>Add New Image</title>
             </Header>
     
             <Grid.Column width={6} />
             <Grid.Column width={4}>
-              <Form onSubmit={this.onSubmit} >
+              <Form onSubmit={this.props.onAddNewPic} >
                 <Header as="h1">Add an image</Header>
                 <Form.Input
                   inline

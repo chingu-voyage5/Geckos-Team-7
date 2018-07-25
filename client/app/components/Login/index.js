@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Form, Header, Message } from 'semantic-ui-react';
-//import { Helmet } from 'react-helmet';
+import {axios} from 'axios';
 import store from 'store';
 import {Link } from 'react-router-dom';
 import './style.css';
@@ -8,7 +8,7 @@ import './style.css';
 class Login extends React.Component{
     constructor(props){
         super(props);
-        this.state ={username:'',password:'',error:false}
+        this.state ={username:'',password:'', message:''}
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
@@ -19,13 +19,25 @@ class Login extends React.Component{
     onSubmit(e){
         //pull username and password from state 
         const { username, password } = this.state;
-        //pull history from props
+       
         const { history } = this.props;
-        this.setState({ error: false });
-        if (!(username === 'chau' && password === 'tran')) {
-            return this.setState({ error: true });}
-            store.set('loggedIn', true);
-            history.push('/homepage');
+        // this.setState({ error: false });
+        // if (!(username === 'chau' && password === 'tran')) {
+        //     return this.setState({ error: true });}
+        //     store.set('loggedIn', true);
+        //     history.push('/homepage');
+
+        axios.post('/api/users/login', { username, password })
+      .then((result) => {
+        localStorage.setItem('jwtToken', result.data.token);
+        this.setState({ message: '' });
+        this.props.history.push('/homepage')
+      })
+      .catch((error) => {
+        if(error.response.status === 401) {
+          this.setState({ message: 'Login failed. Username or password is not matched' });
+        }
+      });
     }
 
     render() {
@@ -38,11 +50,11 @@ class Login extends React.Component{
             <Grid.Column width={6} />
             <Grid.Column width={4}>
               <Form  error={error} onSubmit={this.onSubmit}>
-                <Header as="h1">Welcome to Pinterest Clone Login</Header>
-                {error && <Message
+                <Header as="h1">Welcome to Pinterest Login</Header>
+                {/* {error && <Message
                   error={error}
                   content="That username/password is incorrect. Try again!"
-                />}
+                />} */}
                 <Form.Input
                   inline
                   label="Username"
