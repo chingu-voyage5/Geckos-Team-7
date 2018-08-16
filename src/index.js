@@ -2,13 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, compose} from 'redux'
 import reduxThunk from 'redux-thunk';
+import {BrowserRouter, browserHistory} from 'react-router-dom';
 
 import App from './components/App';
+import setAuthorizationToken from './components/utils/setAuthorizationToken';
 import reducer from './reducers'
-import {addItem, delItem, login} from './actions/actions.js'
-const store = createStore(reducer, {}, applyMiddleware(reduxThunk));
+// import {login, successLogin} from './actions/authActions.js'
+import {addMsg, delMsg} from './actions/flashMessages'
+const store = createStore(
+  reducer, compose(applyMiddleware(reduxThunk),
+  window.devToolsExtension ? window.devToolsExtension() : f=> f
+));
 
 console.log(store);
 function logger() {
@@ -16,24 +22,22 @@ function logger() {
 }
 store.subscribe(logger);
 console.log(store.getState());
-store.dispatch(login( {"email":"foot@bar.cm", "password":"12345"}))
+store.dispatch(addMsg({type:'success',text:'Hello'}));
+store.dispatch(addMsg({type:'error',text:'WhatsUp'}));
+//store.dispatch(login( {"email":"foot@bar.com", "password":"123456"}))//just to test
 
-//following is just to test my post api with authentication
-import axios from 'axios'
-window.axios = axios;
-//note axios variable is available only on / and not on any other url
 
-/*
-const url = '/api/pins';
-fetch(url)
-.then(res=>{console.log("fetching data");return res.json()})
-.then(data=>{
-  console.log(data);
-})
-*/
+// So that ones a user is logged in, successive refreshes persist the token
+if (localStorage.token) {
+  setAuthorizationToken(localStorage.token);
+  store.dispatch(successLogin(localStorage.token));
+}
+
 
 ReactDOM.render(
   <Provider store={store}>
+    {/*<BrowserRouter history={browserHistory}>*/}
     <App/>
+    {/*</BrowserRouter>*/}
   </Provider>
   , document.getElementById("app"));

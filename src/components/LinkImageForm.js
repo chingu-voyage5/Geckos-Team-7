@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {connect} from 'react-redux';
 
 class Form extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class Form extends React.Component {
     console.log(this.state.title, this.state.url);
     //should submit here and set state for redux and all
     //also need to make checks
+    console.log("props in handleSubmit of login", this.props)
   }
   render() {
     return (
@@ -48,4 +50,18 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+function mapStateToProps(state) {
+  return {
+    user : state
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login: (email,password)=>{
+      dispatch(login({email,password}))
+    }
+  }
+}
+
+export default connect(null, null)(Form);
