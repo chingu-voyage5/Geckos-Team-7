@@ -1,0 +1,64 @@
+[{
+"desc":"calculator",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710107/latestProjectPics/zzCalculator.png"
+},
+{
+"desc":"documentation",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710109/latestProjectPics/zzDocumentation.png"
+},
+{
+"desc":"survey form",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710108/latestProjectPics/zzform.png"
+},
+{
+"desc":"Heat Map: D3",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710108/latestProjectPics/zzHeat-MapD3.png"
+},
+{
+"desc":"Meteor Landing: D3",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710108/latestProjectPics/zzMeteroriteLandingfccwithZoom.png"
+},
+{
+"desc":"Pomodoro",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710108/latestProjectPics/zzPomodoroTimer.png"
+},
+{
+"desc":"quote Generator",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710107/latestProjectPics/zzQuotegenerator.png"
+},
+{
+"desc":"Markdown Viewer React",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710109/latestProjectPics/zzReactMarkdownViewer.png"
+},
+{
+"desc":"Recipe Box React",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710108/latestProjectPics/zzReactRecipeBox.png"
+},
+{
+"desc":"scatter Plot D3",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710108/latestProjectPics/zzScatterPlotD3freecodecamp.png"
+},
+{
+"desc":"Shooter game",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710108/latestProjectPics/zzShooter.png"
+},
+{
+"desc":"Simon Says",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710109/latestProjectPics/zzSimonSays.png"
+},
+{
+"desc":"Tic Tac Toe",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710109/latestProjectPics/zzTic-TacToe.png"
+},
+{
+"desc":"To-do List",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710109/latestProjectPics/zzTo-doList.png"
+},
+{
+"desc":"Tribute Page",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710109/latestProjectPics/zzTributePagefreecodecamp.png"
+},
+{
+"desc":"Twitch Streamers",
+"img":"https://res.cloudinary.com/dpk9afefc/image/upload/v1510710108/latestProjectPics/zzTwitchTVAppfcc.png"
+}]

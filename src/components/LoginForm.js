@@ -25,7 +25,6 @@ class LoginForm extends React.Component {
     onChange(e) {
         const {name, value} = e.target;
         this.setState({ [name]: value });
-        console.log(this.state);
     }
     isValid() {
         const {errors, isValid } = validateLoginInput(this.state);
@@ -92,10 +91,9 @@ class LoginForm extends React.Component {
                     {/*Message displayed after response from server*/}
                     <span className="help-block has-error">{errors.submit}</span>
                 </div>
-                <div className="form-group">
-                  
+                {/*<div className="form-group">*/}
                   <button className="btn btn-primary btn-lg" disabled={isLoading}>Login</button>
-                </div>
+                {/*</div>*/}
             </form>
         )
     }

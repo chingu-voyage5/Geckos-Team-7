@@ -11,6 +11,7 @@ import DashBoard from './DashBoard';
 import SignupPage from './SignupPage';
 import PinForm from './PinForm';
 import FlashMsgs from './FlashMsgs';
+import requireAuth from '../utils/requireAuth';
 //import Form from '../containers/Form';
 
 //import * as actions from '../actions/authActions'
@@ -37,7 +38,7 @@ class App extends React.Component {
             <Route path='/' exact component={DashBoard}/>
             <Route path='/login' exact component={LoginPage}/>
             <Route path='/signup' exact component={SignupPage}/>
-            <Route path='/pin' exact component={PinForm}/>
+            <Route path='/pin' exact component={requireAuth(PinForm)}/>
             {/*<Route path='/myPins' exact component={MyPins}/>*/}
           </div>
           </BrowserRouter>

@@ -1,9 +1,12 @@
 import React from 'react';
+import {Grid} from './grid';
+import {Card} from './grid';
 
 const DashBoard = ()=> {
     return (
         <div>
-            My awesome dashboard!
+            {/*<Grid/>*/}
+            <Card/>
         </div>
     )
 }

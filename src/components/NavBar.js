@@ -20,6 +20,7 @@ class NavBar extends React.Component {
         console.log("Use a proper initial state to rectify this");
         const loggedInNav = (
             <ul className="nav navbar-nav navbar-right">
+                <li><Link to="/pin">Pin Image</Link></li>
                 <li><a href="#" onClick={this.handleClick}>Logout</a></li>
             </ul>
         );

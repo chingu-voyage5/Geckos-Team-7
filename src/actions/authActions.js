@@ -1,6 +1,6 @@
-import {LOGIN_REQUEST, LOGIN_SUCCESS,LOGIN_FAILURE, LOGOUT} from './types';
+import {LOGIN_SUCCESS,LOGOUT} from './types';
 import axios from 'axios';
-import setAuthorizationToken from '../components/utils/setAuthorizationToken';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 // const url = 'http://localhost:5001/api/users/login';
 
@@ -93,15 +93,15 @@ function logout() {
 
 //following are used by the asych login action creator. 
 // Just successLogin is also used by index.js
-function requestLogin(user) { 
-  return { type: LOGIN_REQUEST, user } 
-}
+// function requestLogin(user) { 
+//   return { type: LOGIN_REQUEST, user } 
+// }
 function successLogin(token) { 
   return { type: LOGIN_SUCCESS, token } 
 }
-function failureLogin(error) { 
-  return { type: LOGIN_FAILURE, error } 
-}
+// function failureLogin(error) { 
+//   return { type: LOGIN_FAILURE, error } 
+// }
 
 function requestLogout() {
   return {

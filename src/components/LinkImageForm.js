@@ -43,7 +43,7 @@ class Form extends React.Component {
           required
           />
         </label>
-        <button onClick={this.handleSubmit}>Add</button>
+        <button onClick={this.handleSubmit} disabled={this.state.isLoading}>Add</button>
       </form>
     )
 

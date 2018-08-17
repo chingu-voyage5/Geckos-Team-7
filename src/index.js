@@ -7,10 +7,10 @@ import reduxThunk from 'redux-thunk';
 import {BrowserRouter, browserHistory} from 'react-router-dom';
 
 import App from './components/App';
-import setAuthorizationToken from './components/utils/setAuthorizationToken';
-import reducer from './reducers'
-// import {login, successLogin} from './actions/authActions.js'
-import {addMsg, delMsg} from './actions/flashMessages'
+import setAuthorizationToken from './utils/setAuthorizationToken';
+import reducer from './reducers';
+import {login, successLogin} from './actions/authActions';
+import {addMsg, delMsg} from './actions/flashMessages';
 const store = createStore(
   reducer, compose(applyMiddleware(reduxThunk),
   window.devToolsExtension ? window.devToolsExtension() : f=> f
