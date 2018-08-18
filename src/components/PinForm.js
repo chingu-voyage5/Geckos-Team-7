@@ -40,6 +40,7 @@ class PinForm extends React.Component{
             this.setState({errors:{}, isLoading: true});
             this.props.createPin({image:this.state.title, sourceUrl:this.state.url}).then(
                 (res)=>{console.log("element created");
+                //this res doesn't have pincreated details
                 console.log("props inside create Pin", this.props);
                 this.props.addMsg({
                     type: 'success',
@@ -51,7 +52,11 @@ class PinForm extends React.Component{
             },
                 (err)=>{console.log("this functions will execute to display error: ",err);
                 //In case of creating pin this error whould occur only when some server error
-                this.setState({errors:{submit:err}, isLoading:false})}
+                //or maybe if json token is wrong in setAuthheader. 
+                //or in localStorage and page gets refreshed then setAuthHeader takes from there
+                //in local storage but setAuthHeader is right, pin will be created.
+                //genrally it will be 401 error
+                this.setState({errors:{submit:"Un-authorised to create Pin. Please re-login"}, isLoading:false})}
             )
         }
       }

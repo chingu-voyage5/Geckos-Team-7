@@ -1,9 +1,9 @@
-import {LOGIN_SUCCESS,LOGOUT} from '../actions/types';
+import {LOGIN_SUCCESS,LOGOUT, LOGIN_FAILURE} from '../actions/types';
 
 let token = localStorage.getItem('token');
 console.log("Token is", token)
 // const initialState = token ? { loggedIn: true, token } : {};
-const initialState = {loggedIn:false, token:''}
+const initialState = {loggedIn:false, id:''}
 //this is important else a lot of the fields will be undefined
 
 const authReducer=(state = initialState, action) => {
@@ -11,10 +11,12 @@ const authReducer=(state = initialState, action) => {
     case LOGIN_SUCCESS:
         return {
         loggedIn: true,
-        token: action.token,
+        id: action.id,
         }
+    case LOGIN_FAILURE:
+        return {loggedIn:false, id:''}
     case LOGOUT:
-        return {loggedIn:false, token:''}
+        return {loggedIn:false, id:''}
     default:
         return state
     }

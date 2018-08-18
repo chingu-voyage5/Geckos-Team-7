@@ -11,6 +11,7 @@ import setAuthorizationToken from './utils/setAuthorizationToken';
 import reducer from './reducers';
 import {login, successLogin} from './actions/authActions';
 import {addMsg, delMsg} from './actions/flashMessages';
+import { loadPins } from './actions/pinActions';
 const store = createStore(
   reducer, compose(applyMiddleware(reduxThunk),
   window.devToolsExtension ? window.devToolsExtension() : f=> f
@@ -25,6 +26,7 @@ console.log(store.getState());
 store.dispatch(addMsg({type:'success',text:'Hello'}));
 store.dispatch(addMsg({type:'error',text:'WhatsUp'}));
 //store.dispatch(login( {"email":"foot@bar.com", "password":"123456"}))//just to test
+store.dispatch(loadPins());
 
 
 // So that ones a user is logged in, successive refreshes persist the token

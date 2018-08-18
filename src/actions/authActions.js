@@ -1,24 +1,7 @@
-import {LOGIN_SUCCESS,LOGOUT} from './types';
+import {LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT} from './types';
 import axios from 'axios';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-// const url = 'http://localhost:5001/api/users/login';
-
-/*
-const addItem = (item)=>{
-  return {
-    type: ADD_ITEM,
-    item
-  }
-}
-
-const delItem = (index)=>{
-  return {
-    type: DELETE_ITEM,
-    index
-  }
-}
-*/
 
 //Asych action creator to login user
 function login({email, password}) {
@@ -30,12 +13,6 @@ function login({email, password}) {
     //mode: 'no-cors',
     body: JSON.stringify({ email, password })
 };
-// let config = {
-//   method: 'POST',
-//   headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-//   body: JSON.stringify({ email, password })
-// }
-
   return dispatch => {
     // We dispatch requestLogin to kickoff the call to the API
     //dispatch(requestLogin(email))
@@ -44,13 +21,15 @@ function login({email, password}) {
       .then(response =>{
         console.log("response is", response);
         if (!response.ok) {
-          // If there was a problem, we want to
-          // dispatch the error condition
-          //dispatch(failureLogin("Password and email do not match"));//uncomment
+          console.log("Wiping login slate clear in case of re-login");
+          localStorage.clear('token');
+          dispatch(failureLogin("Failure"));//So as to reset store auth creds
+          //if logged in person tries to log in as some other user
           return Promise.reject("Password and email do not match")//uncomment
         } 
-        return response.json()//.then(user => ({ user, response }))
+        return response.json()
             }).then(data =>  {
+              console.log("data returned on login", data);
               const token = data.token;
               console.log("token is", token);
           // If login was successful at the server side
@@ -62,7 +41,7 @@ function login({email, password}) {
           //from local storage should always be done in asynch action creator
           localStorage.setItem('token', token);
           setAuthorizationToken(token);
-          dispatch(successLogin(token))// Dispatch the success action
+          dispatch(successLogin(data.id))// Dispatch the success action
       })//.catch(err => console.log("Error: ", err))
   }
   
@@ -96,12 +75,13 @@ function logout() {
 // function requestLogin(user) { 
 //   return { type: LOGIN_REQUEST, user } 
 // }
-function successLogin(token) { 
-  return { type: LOGIN_SUCCESS, token } 
+function successLogin(id) { 
+  return { type: LOGIN_SUCCESS, id } 
 }
-// function failureLogin(error) { 
-//   return { type: LOGIN_FAILURE, error } 
-// }
+
+function failureLogin(error) { 
+  return { type: LOGIN_FAILURE, error } 
+}
 
 function requestLogout() {
   return {

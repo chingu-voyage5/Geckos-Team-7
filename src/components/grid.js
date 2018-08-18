@@ -4,7 +4,7 @@ import Masonry from 'masonry-layout';
 import projects from '../links.json';
 import '../css/style.css';
 
-import Card from './Card';
+import Pin from './Pin';
 
 class Grid extends React.Component {
     constructor(props) {

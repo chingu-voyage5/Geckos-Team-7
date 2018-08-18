@@ -11,5 +11,7 @@ const DELETE_MSG = 'DELETE_MSG';
 // const LOGIN_REQUEST = 'LOGIN_REQUEST';
 // const LOGIN_FAILURE = 'LOGIN_FAILURE';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+const LOGIN_FAILURE = 'LOGIN_FAILURE';//so that if a user logs in from some other 
+//credentials and it's a fail, all values should get reset. 
 const LOGOUT = 'LOGOUT'
-export {ADD_PIN, DELETE_PIN, ADD_MSG, DELETE_MSG, LOGIN_SUCCESS, LOGOUT}
+export {ADD_PIN, DELETE_PIN, ADD_MSG, DELETE_MSG, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT}

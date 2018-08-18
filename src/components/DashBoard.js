@@ -1,12 +1,12 @@
 import React from 'react';
 import {Grid} from './grid';
-import {Card} from './grid';
+import Pin from './Pin';
 
 const DashBoard = ()=> {
     return (
         <div>
             {/*<Grid/>*/}
-            <Card/>
+            <Pin/>
         </div>
     )
 }

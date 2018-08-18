@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 import authReducer from './authReducer';
-import items from './items';
+import pinsReducer from './pinsReducer';
 import flashReducer from './flashMsgReducer';
 
 export default combineReducers({
   auth: authReducer,
-  items: items,
+  pins: pinsReducer,
   flashMsgs: flashReducer
 })

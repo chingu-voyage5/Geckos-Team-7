@@ -17,11 +17,18 @@ export function createPin(data) {
     return dispatch=> {
       return axios.post(url, data).then(
         res=>{
+          //res.data has data about the pin added.
+          //use that to dispatch(addPin) here itself
           console.log("response for create pin is", res);
           //we need a pins global state.
           //which contains All the pins. Right now we have less pins 
           //so can afford to have all pins as Dashboard gets rendered or mounted 
           //can dispatch addPin to pins global state here
+          if (res.status===200) {
+            const {_id, image, likes, sourceUrl, user} = res.data.pincreated;
+            dispatch(addPin({id:_id, title:image, likes:likes, url:sourceUrl, userId:user}));
+          }
+            
         }
       )
     }
@@ -29,8 +36,18 @@ export function createPin(data) {
 
 //Asynch; removes pin from backend; authentication
 //Header has been set by setAuthorizationToken
-export function removePin(data) {
-
+export function removePin(id) {
+  const url = '/api/pins'
+  axios.delete(url,{
+    params:{id:id}
+  }).then(
+    res=>{
+      console.log("response for deleting pin", res);
+      //if pin has been deleted, dispatch a delPin to remove from store
+      //if user not authorized, display message that can't del pin. 
+      //del icon visible only when user views his own pins??
+    }
+  )
 }
 
 //These are for adding pins to state in store
