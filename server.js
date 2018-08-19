@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+var morgan = require('morgan')
 
 //Connects routes
 const users = require("./routes/api/users");
@@ -28,6 +29,8 @@ app.use(passport.initialize());
 
 //Passport Config
 require("./config/passport")(passport);
+
+app.use(morgan('combined'));
 
 // Sets up api routes
 app.use("/api/users", users);

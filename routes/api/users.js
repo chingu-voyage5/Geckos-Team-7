@@ -78,6 +78,7 @@ router.post("/register", (req, res) => {
 // @desc Login User / Returning JWT Token
 // @access Public
 router.post("/login", (req, res) => {
+  console.log("req.body is", req.body);
   const { errors, isValid } = validateLoginInput(req.body);
 
   //Check validation
@@ -110,7 +111,8 @@ router.post("/login", (req, res) => {
           (err, token) => {
             res.json({
               success: true,
-              token: token
+              token: token,
+              id: user.id
             });
           }
         );

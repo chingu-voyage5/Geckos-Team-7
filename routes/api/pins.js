@@ -43,11 +43,12 @@ router.post(
     pin
       .save()
       .then(pin => {
+        console.log(pin);
         User.findById(req.user.id, function(err, user) {
           if (err) throw err;
           user.pins.unshift(pin);
           user.save();
-          res.status(200).json({ pincreated: "Success" });
+          res.status(200).json({ pincreated: pin });
         });
       })
       .catch(err => {
@@ -142,9 +143,10 @@ router.post(
 // @desc delete pin by id
 // @access Private
 router.delete(
-  ":id",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("INSIDE DEL PATH:: req.user.id and req.params.id inside del pin", req.user.id, req.params.id)
     User.findById(req.user.id).then(user => {
       Pin.findById(req.params.id)
         .then(pin => {

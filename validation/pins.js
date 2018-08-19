@@ -16,7 +16,7 @@ module.exports = function validateNewPin(data) {
 
   if (isEmpty(data.image)) {
     //if (!Validator.isURL(data.image)) {
-      errors.sourcImg = "Please enter a name your image";
+      errors.sourcImg = "Please enter a name for your image";
     //}
   }
 
