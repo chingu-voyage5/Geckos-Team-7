@@ -1,12 +1,43 @@
 import axios from 'axios';
-import { ADD_PIN, DELETE_PIN } from './types';
+import { ADD_PIN, DELETE_PIN, LOADING_DATA, LOADED_DATA, LOADING_FAILURE } from './types';
 
+//**Loding initial data **
+function loadingData() {
+  return {
+    type: LOADING_DATA
+  }
+}
+
+function loadedData(data) {
+  return {
+    type: LOADED_DATA,
+    pins: data
+  }
+}
+
+function loadingFailure(err) {
+  return {
+    type: LOADING_FAILURE,
+    err
+  }
+}
+//// The asynch function to actually load data
 export function loadPins() {
-  const url = '/api/pins'
+  const url = '/api/pins';
   return (dispatch) => {
-    return axios.get(url).then(res=>{
-      console.log(res);
+    dispatch(loadingData());
+    return axios.get(url)
+      .then(res=>{
+      console.log("response from loadPins", res);
+      let pins = res.data.map((pin)=>{
+        return {id:pin._id, title:pin.image, likes:pin.likes, url:pin.sourceUrl, userId:pin.user}
+      })
+      dispatch(loadedData(pins));
     })
+      .catch((err)=>{
+        console.log("error from loadPins", err);
+        dispatch(loadingFailure(err));
+      })
   }
 }
 
@@ -37,17 +68,26 @@ export function createPin(data) {
 //Asynch; removes pin from backend; authentication
 //Header has been set by setAuthorizationToken
 export function removePin(id) {
-  const url = '/api/pins'
-  axios.delete(url,{
-    params:{id:id}
-  }).then(
-    res=>{
-      console.log("response for deleting pin", res);
-      //if pin has been deleted, dispatch a delPin to remove from store
-      //if user not authorized, display message that can't del pin. 
-      //del icon visible only when user views his own pins??
-    }
-  )
+  return (dispatch) => {
+    const url = `/api/pins/${id}`;
+    const access_token = localStorage.getItem('token');
+    console.log("token in local storage is", access_token);
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${access_token}`
+      }}
+    return axios.delete(url, config).then(
+      res=>{
+        console.log("response for deleting pin", res);
+        //if pin has been deleted, dispatch a delPin to remove from store
+        //if user not authorized, display message that can't del pin. 
+        //del icon visible only when user views his own pins??
+        dispatch(delPin(id));//to remove from store state
+      })
+      .catch((err)=>{
+        console.log("error for del pin", err);//not displaying it
+      })
+  }
 }
 
 //These are for adding pins to state in store

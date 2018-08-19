@@ -34,7 +34,8 @@ class Grid extends React.Component {
         console.log(projects);
         let items = projects.map((ele,i)=> {
             return (<div className="grid-item" key={i}>
-            <img src={ele.img} alt="image"/>
+            {/*<img src={ele.img} alt="image"/>*/}
+            <Pin/>
             </div>);
         })
         console.log("items is", items);

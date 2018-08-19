@@ -5,7 +5,7 @@ import Pin from './Pin';
 const DashBoard = ()=> {
     return (
         <div>
-            {/*<Grid/>*/}
+            {/* <Grid/> */}
             <Pin/>
         </div>
     )
