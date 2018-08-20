@@ -48,7 +48,7 @@ router.post("/register", (req, res) => {
     }
     if (user) {
       errors.email = "There is already an account associated with this email";
-      return res.status(400).json(errors);
+      return res.status(400).json(errors.email);
     } else {
       const newUser = new User({
         name: req.body.name,

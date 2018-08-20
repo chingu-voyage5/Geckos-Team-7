@@ -93,7 +93,7 @@ router.get(
 // @access Private
 router.post(
   "/like/:id",
-  passport.authenticate({ session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
     Pin.findById(req.params.id).then(pin => {
