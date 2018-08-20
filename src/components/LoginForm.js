@@ -76,7 +76,7 @@ class LoginForm extends React.Component {
                   value={email}
                   error={errors.email}
                   onChange={this.onChange}
-                  type={email}
+                  type='email'
                 />
 
                 <TextFieldGroup

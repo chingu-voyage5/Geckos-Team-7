@@ -27,9 +27,9 @@ console.log(store.getState());
 // store.dispatch(addMsg({type:'error',text:'WhatsUp'}));
 //store.dispatch(login( {"email":"foot@bar.com", "password":"123456"}))//just to test
 
-store.dispatch(loadPins());
+// store.dispatch(loadPins());
 // console.log("testing delete pin axios")
-store.dispatch(removePin('5b784234fbb82422e830bb37'));
+// store.dispatch(removePin('5b784234fbb82422e830bb37'));
 
 
 
