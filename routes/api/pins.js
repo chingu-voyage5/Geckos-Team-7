@@ -96,9 +96,12 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
+    console.log("Inside like post route", req.user.id);
     Pin.findById(req.params.id).then(pin => {
+      console.log("pin is: ", pin);
+      console.log("# of pin likes by user",pin.likes.filter(like => like._id.toString() === req.user.id));
       if (
-        pin.likes.filter(like => like.toString() !== req.user.id).length > 0
+        pin.likes.filter(like => like._id.toString() === req.user.id).length > 0
       ) {
         return res
           .status(400)
@@ -119,17 +122,20 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
-
+    console.log("Inside unlike post route", req.user.id);
     Pin.findById(req.params.id).then(pin => {
+      console.log("pin is: ", pin);
+      console.log("# of pin likes by user",pin.likes.filter(like => like._id === req.user.id));
       if (
-        pin.likes.filter(like => like.toString() === req.user.id).length == 0
+        pin.likes.filter(like => {console.log(like._id, req.user.id);
+        return like._id.toString() === req.user.id}).length == 0
       ) {
         return res
           .status(400)
           .json({ notliked: "User has not yet liked this pin" });
       }
       const removeIndex = pin.likes
-        .map(user => req.user.id)
+        .map(user => user.id)
         .indexOf(req.user.id);
 
       pin.save().then(res.json(pin));
