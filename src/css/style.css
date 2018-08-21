@@ -17,8 +17,16 @@ html { overflow-y: scroll; }
     float: left;
     border: 1px sold red;
     padding: 5px;
+    text-transform: capitalize;
 }
 .grid-item img {
     display: block;
     max-width: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
+li {
+    display: inline;
 }

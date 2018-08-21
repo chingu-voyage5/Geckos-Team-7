@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { ADD_PIN, DELETE_PIN, LOADING_DATA, LOADED_DATA, LOADING_FAILURE } from './types';
+import { ADD_PIN, DELETE_PIN, ADD_TO_LIKES, REMOVE_FROM_LIKES , 
+  LOADING_DATA, LOADED_DATA, LOADING_FAILURE } from './types';
 
 //**Loding initial data **
 function loadingData() {
@@ -30,7 +31,9 @@ export function loadPins() {
       .then(res=>{
       console.log("response from loadPins", res);
       let pins = res.data.map((pin)=>{
-        return {id:pin._id, title:pin.image, likes:pin.likes, url:pin.sourceUrl, userId:pin.user}
+        return {id:pin._id, title:pin.image, 
+          likes:pin.likes.map((like)=>like._id), 
+          url:pin.sourceUrl, userId:pin.user}
       })
       dispatch(loadedData(pins));
     })
@@ -102,5 +105,54 @@ export function delPin(id) {
   return {
     type: DELETE_PIN,
     id
+  }
+}
+
+export function addToLikes (id, userId) {
+  return {
+    type: ADD_TO_LIKES,
+    id,
+    userId
+  }
+}
+
+export function removeFromLikes (id, userId) {
+  return {
+    type: REMOVE_FROM_LIKES,
+    id,
+    userId
+  }
+}
+
+export function likePin(id,userId) {
+  return (dispatch) => {
+    const url = `/api/pins/like/${id}`;
+    return axios.post(url).then(
+      res=>{
+        console.log("response for liking pin", res);
+        // if pin has been liked, increment counter etc ie dispatch incCounter
+        // like or unlike button depending on if user has already liked it or not
+        dispatch(addToLikes (id, userId));
+      })
+      .catch((err)=>{
+        console.log("error for liking pin", err);//not displaying it
+      })
+  }
+}
+
+export function unlikePin(id, userId) {
+  return (dispatch) => {
+    const url = `/api/pins/unlike/${id}`;
+    console.log("unliking pin");
+    return axios.post(url).then(
+      res=>{
+        console.log("response for unliking pin", res);
+        //if pin has been unliked, dispatch a reduce counter kind of thing
+        // unlike icon 
+        dispatch(removeFromLikes(id, userId));
+      })
+      .catch((err)=>{
+        console.log("error for unliking pin", err);//not displaying it
+      })
   }
 }

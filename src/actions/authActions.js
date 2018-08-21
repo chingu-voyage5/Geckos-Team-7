@@ -40,6 +40,8 @@ function login({email, password}) {
           //setting something in local storage and deleting something 
           //from local storage should always be done in asynch action creator
           localStorage.setItem('token', token);
+          localStorage.setItem('id', data.id);
+          //if a user refreshes page, we still want access to loggedIn user info hence id also saved
           setAuthorizationToken(token);
           dispatch(successLogin(data.id))// Dispatch the success action
       })//.catch(err => console.log("Error: ", err))
@@ -65,6 +67,7 @@ function login(data) {
 function logout() {
   return (dispatch)=> {
     localStorage.clear('token');
+    localStorage.clear('id');
     setAuthorizationToken(false);
     dispatch(requestLogout());
   }

@@ -1,7 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import Masonry from 'masonry-layout';
 
-import projects from '../links.json';
+// import projects from '../links.json';
 import '../css/style.css';
 
 import Pin from './Pin';
@@ -12,7 +13,7 @@ class Grid extends React.Component {
         //this.state = {items: []}
     }
     componentDidMount() {
-        
+        /*
        var elem = document.querySelector('.grid');
         
         var msnry = new Masonry( elem, {
@@ -25,28 +26,28 @@ class Grid extends React.Component {
        setTimeout(function() {
         console.log("Masonry layout", msnry);
         msnry.layout();
-    },2000);//doing this so that all images would have loaded in 5 seconds
+    },5000);//doing this so that all images would have loaded in 5 seconds
     //better way would be to do msnry.layout() after each image loads
     //This would not work great if there were a lot of images
+    */
     }
     createGrid() {
         console.log(Masonry);
-        console.log(projects);
-        let items = projects.map((ele,i)=> {
-            return (<div className="grid-item" key={i}>
-            {/*<img src={ele.img} alt="image"/>*/}
-            <Pin/>
+        // console.log(projects);
+        // let items = projects.map((ele,i)=> {
+          console.log("props inside grid", this.props)
+           let items = this.props.pins.map((pin,i)=>{
+             //console.log(pin);
+            return (
+            <div className="grid-item" key={i}>
+              {/*<img src={ele.img} alt="image"/>*/}
+              <Pin pin={pin}/>
             </div>);
         })
-        console.log("items is", items);
-        
-        
-        
         return items;
 
     }
     render() {
-        
         return (
             <div className="grid">
                 <div className="grid-sizer"></div>
@@ -56,4 +57,12 @@ class Grid extends React.Component {
     }
 }
 
-export {Grid};
+const mapStatToProps = (state) => {
+    return {
+        pins: state.pins.pins
+    }
+}
+
+const ConnectedGrid = connect(mapStatToProps,null)(Grid);
+export {Grid, ConnectedGrid};
+// export default connect(mapStatToProps, null)(Grid);

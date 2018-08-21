@@ -21,6 +21,7 @@ class NavBar extends React.Component {
         const loggedInNav = (
             <ul className="nav navbar-nav navbar-right">
                 <li><Link to="/pin">Pin Image</Link></li>
+                <li><Link to="/myPins">My Pins</Link></li>
                 <li><a href="#" onClick={this.handleClick}>Logout</a></li>
             </ul>
         );

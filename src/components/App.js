@@ -10,8 +10,10 @@ import NavBar from './NavBar';
 import DashBoard from './DashBoard';
 import SignupPage from './SignupPage';
 import PinForm from './PinForm';
+import MyPins from './MyPins';
 import FlashMsgs from './FlashMsgs';
 import requireAuth from '../utils/requireAuth';
+import {loadPins} from '../actions/pinActions';
 //import Form from '../containers/Form';
 
 //import * as actions from '../actions/authActions'
@@ -22,7 +24,7 @@ import {connect} from 'react-redux'
 
 class App extends React.Component {
   componentDidMount() {
-    //this.props.fetchUser();
+    this.props.loadPins();
   }
   render() {
     return (
@@ -39,7 +41,7 @@ class App extends React.Component {
             <Route path='/login' exact component={LoginPage}/>
             <Route path='/signup' exact component={SignupPage}/>
             <Route path='/pin' exact component={requireAuth(PinForm)}/>
-            {/*<Route path='/myPins' exact component={MyPins}/>*/}
+            <Route path='/myPins' exact component={requireAuth(MyPins)}/>
           </div>
           </BrowserRouter>
       </div>
@@ -49,5 +51,5 @@ class App extends React.Component {
 
 }
 
-// export default connect(null,actions)(App);
-export default App;
+export default connect(null,{loadPins})(App);
+// export default App;
