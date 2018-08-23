@@ -1,0 +1,71 @@
+$header-color : #fff;
+$footer-color : #fff;
+$footer-color: #36383f;
+$default-heart: #999999;
+// $liked-heart : #ffaeae;
+// $liked-heart : #ff8484;
+$liked-heart: #ff4545;
+
+
+
+.card-header, .card-footer {
+    padding: 10px;
+    color: $default-heart;
+    background: $footer-color;
+}
+.card-header {
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card-footer {
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+button {
+    background: $footer-color;
+    border: none;
+    // padding: 10px;
+    :focus {
+        outline: 0;
+    }
+}
+.icon {
+    padding: 0px;
+}
+.glyphicon {
+    font-size: 20px;
+    color: $default-heart;//set color not background
+}
+// .glyphicon-heart {
+//     font-size: 20px;
+//     color: $default-heart;//color not background
+// }
+.liked-heart {
+    color: $liked-heart;
+}
+ul {
+    list-style-type: none;
+    margin-bottom: 0;//was default 10px from bootstrap card-footer
+}
+li {
+    display: inline;
+    padding: 10px;
+    color: $default-heart;
+}
+.card {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    // border: 5px solid $footer-color;
+    box-shadow: 1px 1px  #191A1D;
+}

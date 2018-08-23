@@ -32,12 +32,17 @@ class NavBar extends React.Component {
             </ul>
         );
         return (
-            <nav className="navbar navbar-default">
+            <nav className="navbar navbar-inverse">
                 <div className="container-fluid">
                   <div className="navbar-header">
                     <Link to="/" className="navbar-brand">Picterest</Link>
+                    <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>                        
+                    </button>
                   </div>
-                  <div className="collapse navbar-collapse">
+                  <div className="collapse navbar-collapse" id="myNavbar">
                     {loggedIn?loggedInNav:guestNav}
                   </div>
                 </div>
