@@ -17,7 +17,7 @@ module.exports = passport => {
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey   : keys.secretOrKey
     }, function (jwt_payload, done) {
-      console.log("jwt_payload", jwt_payload);
+      //console.log("jwt_payload", jwt_payload);
       User.findById(jwt_payload.id)
         .then(user => {
           if (user) {
