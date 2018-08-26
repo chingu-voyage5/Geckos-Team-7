@@ -1,3 +1,7 @@
 /node_modules
+/client/node_modules
 keys.js
 package-lock.json
+help.md
+/client/help.md
+/client/public/bundle.js
