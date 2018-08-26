@@ -2,7 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-var morgan = require('morgan')
+const morgan = require('morgan')
+const path = require('path');
 
 //Connects routes
 const users = require("./routes/api/users");
@@ -42,7 +43,20 @@ app.use("/api/pins", passport.authenticate("jwt", { session: false }), pins.prot
 ///making some change
 //app.use("/api/pins/secret", passport.authenticate("jwt", { session: false }), pins);
 
-app.get("/", (req, res) => res.json("Hello World"));
+//app.get("/", (req, res) => res.json("Hello World"));
+if (process.env.NODE_ENV === 'production') {
+  //production assets like bundle.js
+  app.use(express.static('client/public'));
+  
+  //Express will serve up index.html 
+  //if it doesn't recognize the route
+  app.get("*", (req, res)=> {
+    res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
+  });//this route is in the end because it is like a catch all
+}
+else {
+  app.get("/", (req, res) => res.json("Hello World"));
+}
 
 const port = process.env.PORT || 5001;
 
